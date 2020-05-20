@@ -11,9 +11,9 @@ partTime=2
 workingDays=20
 maxHours=100
 
-for ((day=1;$day<=$workingDays; day++))
-do
-empType=$((RANDOM%3))
+
+function workHours() {
+
 case $empType in
 				$fullTime)  	dailyHour=8
 						  ;;
@@ -22,15 +22,24 @@ case $empType in
 							*)		dailyHour=0
 							;;
 esac
+return $dailyHour
+}
+
+for ((day=1;$day<=$workingDays; day++))
+do
+empType=$((RANDOM%3))
+workHours $empType
 totalHours=$(($totalHours+$dailyHour))
-wagePerDay=$(($dailyHour*$wagePerHour))
-wagePerMonth=$(($wagePerMonth+$wagePerDay))
+#wagePerDay=$(($dailyHour*$wagePerHour))
+
 if (($totalHours>=$maxHours))
 then
 	echo "Maximum Hours reached by employee"
 	break
 fi
 done
+wagePerMonth=$(($totalHours*$wagePerHour))
+
 echo " "
 echo "Monthly Wages      : $wagePerMonth"
 echo "Total Hours worked : $totalHours"
