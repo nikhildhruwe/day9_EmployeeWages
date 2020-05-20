@@ -2,6 +2,7 @@
 echo " "
 echo "    Welcome to Employee Wage Computation Program "
 echo " "
+declare -A wagePerDay
 count=0
 wagePerHour=20
 dailyHour=8
@@ -31,7 +32,7 @@ empType=$((RANDOM%3))
 workHours $empType
 totalHours=$(($totalHours+$dailyHour))
 wagePerDay=$(($dailyHour*$wagePerHour))
-wagePerDay[count++]=$wagePerDay
+wagePerDay["$day"]=$wagePerDay
 if (($totalHours>=$maxHours))
 then
 	echo "Maximum Hours reached by employee"
@@ -39,8 +40,12 @@ then
 fi
 done
 wagePerMonth=$(($totalHours*$wagePerHour))
-
+wagePerDay[$day]=$wagePerMonth
 echo " "
-echo "Daily wages for a month ${wagePerDay[@]}"
 echo "Total Hours worked : $totalHours"
 echo "Monthly Wages      : $wagePerMonth"
+echo "Daily Wages: "
+for key in ${!wagePerDay[@]}
+do
+	echo "day $key : ${wagePerDay[$key]}"
+done
