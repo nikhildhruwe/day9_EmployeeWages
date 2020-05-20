@@ -13,14 +13,11 @@ for ((day=1;$day<=$workingDays; day++))
 do
 empType=$((RANDOM%3))
 case $empType in
-				$fullTime)  	echo "Full Time Employee"
-									dailyHour=8
+				$fullTime)  	dailyHour=8
 						  ;;
- 	 			$partTime ) 	echo "Part Time Employee:"
-									dailyHour=4
+ 	 			$partTime ) 	dailyHour=4
 							;;
-							*)		echo "Employee is Absent"
-									dailyHour=0
+							*)		dailyHour=0
 							;;
 esac
 wagePerDay=$(($dailyHour*$wagePerHour))
