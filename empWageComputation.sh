@@ -5,19 +5,23 @@ echo " "
 
 wagePerHour=20
 dailyHour=8
-present=1
 absent=0
-attendance=$((RANDOM%2))
+fullTime=1
+partTime=2
+empType=$((RANDOM%3))
 
-if (( $attendance == $present ))
+if (($empType == $fullTime))
 then
-	echo "Employee Present"
+	echo "Full Time Employee"
 	dailyHour=8
+elif (($empType == $partTime ))
+then
+	echo "Part Time Employee:"
+	dailyHour=8
+	wagePerHour=10
 else
-	echo "Emmployee Absent"
+	echo "Employee is Absent"
 	dailyHour=0
 fi
-
 wagePerDay=$(($dailyHour*$wagePerHour))
-
-echo "Daily Employee Wage : $wagePerDay"
+echo "Employee Wage : $wagePerDay"
